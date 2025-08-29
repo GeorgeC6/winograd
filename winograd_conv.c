@@ -224,7 +224,7 @@ void winograd_conv(const float* restrict image, const float* restrict filter, fl
     #pragma omp parallel for private(tmp_u, u)
     for (int k = 0; k < K; ++k) {
         for (int c = 0; c < C; ++c) {
-            float* filters_ptr =filter + (k * C + c) * sizeF;
+            const float* filters_ptr = filter + (k * C + c) * sizeF;
 
             compute_U_neon(filters_ptr, u);
             

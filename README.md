@@ -1,9 +1,25 @@
-## 编译
-目前采用 gcc 方法编译，Makefile 文件有点小问题
+## 编译和运行
+
+由于登录节点 (`x86_64`) 和计算节点 (`aarch64`) 的架构不同，推荐在 SLURM 作业中进行编译和运行。
+
+### SLURM 环境运行
 
 ```bash
-OPENBLAS_DIR=/home/hpc101/h3220101406/spack/opt/spack/linux-aarch64/openblas-0.3.30-hgqgx5krbsc53mvhqcsdj4bo4hphy3xk
+sbatch run.sh
+```
 
+运行脚本会自动加载 spack 环境，使用 Makefile 在计算节点上编译项目并运行基准测试。
+
+### OpenBLAS 路径检测优先级
+
+1. 环境变量 `OPENBLAS_DIR`
+2. `spack location -i openblas`（动态获取）
+3. 系统包管理器安装的 OpenBLAS
+
+### 旧的 gcc 编译方法
+
+```bash
+OPENBLAS_DIR=$(spack location -i openblas)
 gcc -O3 -march=armv8-a -fopenmp -I${OPENBLAS_DIR}/include main.c naive_conv.c winograd_conv.c -o winograd ${OPENBLAS_DIR}/lib/libopenblas.a -lm -lpthread
 ```
 

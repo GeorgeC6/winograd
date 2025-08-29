@@ -1,0 +1,97 @@
+Starting Winograd convolution benchmark...
+Job ID: 51467
+Node: kp06
+Architecture: aarch64
+CPUs per task: 64
+OpenMP threads: 64
+Working directory: /home/hpc101/h3230100137/winograd
+System tools check:
+GCC version: gcc (Debian 12.2.0-14+deb12u1) 12.2.0
+===============================
+Loading spack environment...
+Spack environment loaded from: /home/hpc101/h3230100137/spack/share/spack/setup-env.sh
+Spack command is available
+1.1.0.dev0 (e3b1b80c57fba677213c6e1e761d4b93dde05289)
+Loading OpenBLAS via spack...
+Found OpenBLAS at: /home/hpc101/h3230100137/spack/opt/spack/linux-aarch64/openblas-0.3.30-zkflctjbvflsadaiozx4npxxpr7gwm75
+OpenBLAS verification successful!
+Include directory: /home/hpc101/h3230100137/spack/opt/spack/linux-aarch64/openblas-0.3.30-zkflctjbvflsadaiozx4npxxpr7gwm75/include
+Library directory: /home/hpc101/h3230100137/spack/opt/spack/linux-aarch64/openblas-0.3.30-zkflctjbvflsadaiozx4npxxpr7gwm75/lib
+===============================
+Cleaning previous build...
+rm -f winograd
+Compiling project on compute node with Makefile...
+gcc -std=c11 -O3 -march=armv8.2-a+simd -fopenmp -I/home/hpc101/h3230100137/spack/opt/spack/linux-aarch64/openblas-0.3.30-zkflctjbvflsadaiozx4npxxpr7gwm75/include main.c naive_conv.c winograd_conv.c -o winograd -L/home/hpc101/h3230100137/spack/opt/spack/linux-aarch64/openblas-0.3.30-zkflctjbvflsadaiozx4npxxpr7gwm75/lib /home/hpc101/h3230100137/spack/opt/spack/linux-aarch64/openblas-0.3.30-zkflctjbvflsadaiozx4npxxpr7gwm75/lib/libopenblas.a -lm -lpthread
+Setting up runtime library path...
+LD_LIBRARY_PATH: /home/hpc101/h3230100137/spack/opt/spack/linux-aarch64/openblas-0.3.30-zkflctjbvflsadaiozx4npxxpr7gwm75/lib:
+===============================
+Running Winograd convolution with config.txt...
+=== Running Naive Convolution ===
+Layer  0: 47.63 ms (56.2 GFLOPS)
+Layer  1: 517.45 ms (55.2 GFLOPS)
+Layer  2: 867.81 ms (65.8 GFLOPS)
+Layer  3: 1734.11 ms (65.8 GFLOPS)
+Layer  4: 3484.36 ms (65.5 GFLOPS)
+Layer  5: 1327.68 ms (65.5 GFLOPS)
+Layer  6: 2666.84 ms (65.2 GFLOPS)
+Layer  7: 5697.73 ms (61.1 GFLOPS)
+Layer  8: 10764.33 ms (64.6 GFLOPS)
+Layer  9: 5151.10 ms (46.0 GFLOPS)
+Layer 10: 25.65 ms (82.8 GFLOPS)
+Layer 11: 698.93 ms (64.8 GFLOPS)
+Layer 12: 339.05 ms (64.1 GFLOPS)
+Layer 13: 661.01 ms (65.8 GFLOPS)
+Layer 14: 185.59 ms (65.9 GFLOPS)
+Layer 15: 64.50 ms (65.8 GFLOPS)
+Layer 16: 172.90 ms (65.5 GFLOPS)
+Layer 17: 166.95 ms (65.1 GFLOPS)
+Baseline Total: 34573.64 ms (61.4 GFLOPS)
+
+=== Running Winograd Convolution ===
+Layer  0: 36.41 ms (73.5 GFLOPS)
+Layer  1: 65.24 ms (437.6 GFLOPS)
+Layer  2: 103.99 ms (549.0 GFLOPS)
+Layer  3: 184.87 ms (617.7 GFLOPS)
+Layer  4: 319.24 ms (715.4 GFLOPS)
+Layer  5: 137.63 ms (631.9 GFLOPS)
+Layer  6: 240.13 ms (724.4 GFLOPS)
+Layer  7: 477.28 ms (728.9 GFLOPS)
+Layer  8: 1253.80 ms (554.9 GFLOPS)
+Layer  9: 421.77 ms (561.3 GFLOPS)
+Layer 10: 34.48 ms (61.6 GFLOPS)
+Layer 11: 108.79 ms (416.5 GFLOPS)
+Layer 12: 58.95 ms (368.8 GFLOPS)
+Layer 13: 97.95 ms (444.0 GFLOPS)
+Layer 14: 21.69 ms (563.9 GFLOPS)
+Layer 15: 6.24 ms (680.6 GFLOPS)
+Layer 16: 16.35 ms (692.8 GFLOPS)
+Layer 17: 15.70 ms (692.3 GFLOPS)
+Custom Total: 3600.52 ms (589.8 GFLOPS)
+
+=== Correctness Check ===
+Layer  0: [32mCORRECT[0m (Speedup: 1.31x)
+Layer  1: [32mCORRECT[0m (Speedup: 7.93x)
+Layer  2: [32mCORRECT[0m (Speedup: 8.34x)
+Layer  3: [32mCORRECT[0m (Speedup: 9.38x)
+Layer  4: [32mCORRECT[0m (Speedup: 10.91x)
+Layer  5: [32mCORRECT[0m (Speedup: 9.65x)
+Layer  6: [32mCORRECT[0m (Speedup: 11.11x)
+Layer  7: [32mCORRECT[0m (Speedup: 11.94x)
+Layer  8: [32mCORRECT[0m (Speedup: 8.59x)
+Layer  9: [32mCORRECT[0m (Speedup: 12.21x)
+Layer 10: [32mCORRECT[0m (Speedup: 0.74x)
+Layer 11: [32mCORRECT[0m (Speedup: 6.42x)
+Layer 12: [32mCORRECT[0m (Speedup: 5.75x)
+Layer 13: [32mCORRECT[0m (Speedup: 6.75x)
+Layer 14: [32mCORRECT[0m (Speedup: 8.56x)
+Layer 15: [32mCORRECT[0m (Speedup: 10.34x)
+Layer 16: [32mCORRECT[0m (Speedup: 10.58x)
+Layer 17: [32mCORRECT[0m (Speedup: 10.63x)
+
+=== Final Results ===
+[32mResults are correct!
+[0mBaseline: 34573.64 ms (61.4 GFLOPS)
+Custom:   3600.52 ms (589.8 GFLOPS)
+Overall speedup: 9.60x
+===============================
+Benchmark completed!
